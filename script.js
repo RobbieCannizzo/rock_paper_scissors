@@ -13,32 +13,61 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if ((playerSelection === 'rock') && (computerSelection === 'rock')) {
-        return 'Its a tie! You both played rock!';
+        return tie_RR;
     } else if ((playerSelection === 'rock') && (computerSelection === 'paper')) {
-        return 'You lose! Paper beats rock!';
+        computerScore += 1;
+        return lose_RP;
     } else if ((playerSelection === 'rock') && (computerSelection === 'scissor')) {
-        return 'You win! Rock beats scissors!';
+        playerScore += 1;
+        return win_RS;
     } else if ((playerSelection === 'paper') && (computerSelection === 'rock')) {
-        return 'You win! Paper beats rock!';
+        playerScore += 1;
+        return win_PR;
     } else if ((playerSelection === 'paper') && (computerSelection === 'paper')) {
-        return 'Its a tie! You both played paper!';
+        return tie_PP;
     } else if ((playerSelection === 'paper') && (computerSelection === 'scissor')) {
-        return 'You lose! Scissor beats paper!';
+        computerScore += 1;
+        return lose_PS;
     } else if ((playerSelection === 'scissor') && (computerSelection === 'rock')) {
-        return 'You lose! Rock beats scissor!';
+        computerScore += 1;
+        return lose_SR;
     } else if ((playerSelection === 'scissor') && (computerSelection === 'paper')) {
-        return 'You win! Scissor beats paper!!';
+        playerScore += 1;
+        return win_SP;
     } else if ((playerSelection === 'scissor') && (computerSelection === 'scissor')) {
-        return 'Its a tie! You both played scissor!';
+        return tie_SS;
     } 
     
 }
 
-//getComputerChoice()
-//console.log(choice)
-//console.log(getComputerChoice())
+function game() {
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Choose Rock, Paper, or Scissor!");
+        console.log(playRound(playerSelection, getComputerChoice()));
+    }
+    console.log(determineWinner())
+}
 
-const playerSelection = "scissor";
-const computerSelection = getComputerChoice();
-console.log(choice);
-console.log(playRound(playerSelection, computerSelection));
+function determineWinner() {
+    if (playerScore > computerScore) {
+        return 'You won the game!';
+    } else if (computerScore > playerScore) {
+        return 'You lost the game!';
+    } else {
+        return 'Its a tie! No one wins!'
+    }
+}
+
+let tie_RR = 'Its a tie! You both played rock!';
+let lose_RP = 'You lose! Paper beats rock!';
+let win_RS = 'You win! Rock beats scissors!';
+let win_PR = 'You win! Paper beats rock!';
+let tie_PP = 'Its a tie! You both played paper!';
+let lose_PS = 'You lose! Scissor beats paper!';
+let lose_SR = 'You lose! Rock beats scissor!';
+let win_SP = 'You win! Scissor beats paper!!';
+let tie_SS = 'Its a tie! You both played scissor!';
+
+let playerScore = 0;
+let computerScore = 0;
+game();
